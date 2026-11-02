@@ -1,0 +1,310 @@
+:root {
+    --bg: #1B1036;
+    --card: #241749;
+    --line: #3A2A66;
+    --accent: #FF6B9D;
+    --secondary: #A78BFA;
+    --success: #34D399;
+    --text: #FFFFFF;
+    --muted: #B8A9D9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    min-height: 100%;
+    background: radial-gradient(circle at top, #2e1d5c, var(--bg));
+}
+
+body {
+    width: 92%;
+    max-width: 750px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 40px 0;
+    color: var(--text);
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    width: 100%;
+    margin: 0 0 16px;
+    padding: 16px;
+    font-size: 2.2rem;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--accent);
+    border-radius: 14px;
+}
+
+/* Intro text */
+body > p {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 6px 0;
+}
+
+/* Main game card */
+#Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    padding: 36px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#guess {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Number input */
+#guessField {
+    width: min(100%, 340px);
+    height: 84px;
+    margin-top: 20px;
+    padding: 0 12px;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--accent);
+    background: var(--bg);
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#guessField:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.35);
+}
+
+#guessField:disabled {
+    opacity: 0.5;
+}
+
+/* Submit button */
+#subt {
+    width: min(100%, 320px);
+    height: 56px;
+    margin-top: 16px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#subt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.35);
+}
+
+#subt:active {
+    transform: translateY(0);
+}
+
+/* Results area */
+.resultParas {
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+}
+
+.resultParas p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+/* Previous guesses as chips */
+.guesses {
+    display: inline-block;
+    padding: 4px 12px;
+    color: var(--secondary);
+    background: rgba(167, 139, 250, 0.15);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+/* Remaining attempts */
+.lastResult {
+    display: inline-block;
+    min-width: 36px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+/* "Too high" / "Too low" messages */
+.lowOrHi {
+    min-height: 60px;
+}
+
+.lowOrHi h1 {
+    margin: 10px 0 0;
+    padding: 10px;
+    font-size: 1.4rem;
+    color: var(--success);
+    background: none;
+    border: none;
+}
+
+/* New game button (inserted by the script) */
+.button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 26px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ===== Custom modal (replaces alert) ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(10, 5, 30, 0.7);
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal {
+    width: min(100%, 380px);
+    padding: 32px 28px 26px;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    animation: popIn 0.3s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.modal-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    border-radius: 50%;
+}
+
+.modal-title {
+    margin: 0 0 8px;
+    font-size: 1.5rem;
+    color: var(--text);
+}
+
+.modal-message {
+    margin: 0 0 24px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.modal-btn {
+    width: 100%;
+    height: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.35);
+}
+
+/* Modal types */
+.modal-error .modal-icon {
+    background: rgba(255, 107, 157, 0.15);
+}
+
+.modal-error .modal-title {
+    color: var(--accent);
+}
+
+.modal-success .modal-icon {
+    background: rgba(52, 211, 153, 0.15);
+}
+
+.modal-success .modal-title {
+    color: var(--success);
+}
+
+.modal-gameover .modal-icon {
+    background: rgba(167, 139, 250, 0.15);
+}
+
+.modal-gameover .modal-title {
+    color: var(--secondary);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    #guessField {
+        height: 68px;
+        font-size: 2rem;
+    }
+
+    #guess {
+        font-size: 1.1rem;
+    }
+}
